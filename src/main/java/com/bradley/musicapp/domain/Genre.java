@@ -22,20 +22,49 @@ public class Genre implements Serializable {
     private Long id;
     private String type;
 
+    private Genre(Builder builder){
+        id = builder.id;
+        type = builder.type;
+    }
+    
+    private Genre(){
+    }
+    
+    public static class Builder{
+        private Long id;
+        private String type;
+        
+        public Builder(){           
+        }
+        
+        public Builder id(Long value){
+            this.id = value;
+            return this;
+        }
+        
+        public Builder type(String value){
+            this.type = value;
+            return this;
+        }
+        
+        public Builder genre(Genre genre){
+            id = genre.getId();
+            type = genre.getType();
+            
+            return this;
+        }
+        
+        public Genre build(){
+            return new Genre(this);
+        }
+    }
+    
     public String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }  
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

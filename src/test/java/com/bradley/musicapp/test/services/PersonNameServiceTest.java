@@ -40,14 +40,11 @@ public class PersonNameServiceTest {
         personRepository = ctx.getBean(PersonRepository.class);
         personService = ctx.getBean(PersonNameService.class);
         
-        Person p1 = new Person();
-        p1.setName("Chris");
+        Person p1 = new Person.Builder().name("Chris").build();
         
-        Person p2 = new Person();
-        p2.setName("Cobra");
+        Person p2 = new Person.Builder().name("Cobra").build();
         
-        Person p3 = new Person();
-        p3.setName("Copper");
+        Person p3 = new Person.Builder().name("Copper").build();
         
         personRepository.save(p1);
         personRepository.save(p2);

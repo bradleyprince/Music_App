@@ -6,6 +6,7 @@ package com.bradley.musicapp.domain;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,40 +26,76 @@ public class Artist implements Serializable {
     private Long id;
     private String artistName;
     private Integer artistAge;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="artist_id")
-    private List<Album> albumList;
-
-    public String getArtistName() {
-        return artistName;
+    List<Album> albumList;
+    
+    private Artist(Builder builder){
+        id = builder.id;
+        artistName = builder.artistName;
+        artistAge = builder.artistAge;
+        albumList = builder.albumList;      
+    }
+    
+    private Artist(){    
     }
 
-    public void setArtistName(String artistName) {
-        this.artistName = artistName;
+    public static class Builder{
+        private Long id;
+        private String artistName;
+        private Integer artistAge;
+        List<Album> albumList;
+        
+        public Builder(){           
+        }
+        
+        public Builder id(Long value){
+            this.id = value;
+            return this;
+        }
+        
+        public Builder artistName(String value){
+            this.artistName = value;
+            return this;
+        }
+        
+        public Builder artistAge(Integer value){
+            this.artistAge = value;
+            return this;
+        }
+        
+        public Builder albumList(List<Album> value){
+            this.albumList = value;
+            return this;
+        }
+        
+        public Builder artist(Artist artist){
+            id = artist.getId();
+            artistName = artist.getArtistName();
+            artistAge = artist.getArtistAge();
+            albumList = artist.getAlbumList();
+            return this;
+        }
+        
+        public Artist build(){
+            return new Artist(this);
+        }
+    }
+    
+    public String getArtistName() {
+        return artistName;
     }
 
     public Integer getArtistAge() {
         return artistAge;
     }
-
-    public void setArtistAge(Integer artistAge) {
-        this.artistAge = artistAge;
-    }
-
+    
     public List<Album> getAlbumList() {
         return albumList;
-    }
-
-    public void setAlbumList(List<Album> albumList) {
-        this.albumList = albumList;
     }
     
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

@@ -39,9 +39,7 @@ public class ArtistRepositoryTest {
     public void createArtist() {
         repo = ctx.getBean(ArtistRepository.class);
         
-        Artist artist = new Artist();
-        artist.setArtistAge(23);
-        artist.setArtistName("Bradley");
+        Artist artist = new Artist.Builder().artistAge(23).artistName("Bradley").build();
 
         repo.save(artist);
         id = artist.getId();
@@ -61,8 +59,7 @@ public class ArtistRepositoryTest {
     private void updateArtist(){
         repo = ctx.getBean(ArtistRepository.class);
         Artist artist = repo.findOne(id);
-        Artist updateArtist = artist;
-        updateArtist.setArtistName("John");
+        Artist updateArtist = new Artist.Builder().artistName("John").build();
         
         repo.save(updateArtist);
          

@@ -7,6 +7,8 @@ package com.bradley.musicapp.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,51 +29,93 @@ public class Album implements Serializable {
     private Long id;
     private String albumName;
     private BigDecimal albumPrice;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "album_id")        
     List<Track> trackList;
     @OneToOne
     @JoinColumn(name = "album_id")
     private Genre genre;
+    
 
+    private Album(Builder builder) {
+        id = builder.id;
+        albumName = builder.albumName;
+        albumPrice = builder.albumPrice;
+        trackList = builder.trackList;
+        genre = builder.genre;
+        
+    }
+    
+    private Album(){
+    }
+    
+    public static class Builder{
+        private Long id;
+        private String albumName;
+        private BigDecimal albumPrice;
+        List<Track> trackList;
+        private Genre genre;
+        
+        public Builder(){           
+        }
+        
+        public Builder id(Long value){
+            this.id = value;
+            return this;
+        }
+        
+        public Builder albumName(String value){
+            this.albumName = value;
+            return this;
+        }
+        
+        public Builder albumPrice(BigDecimal value){
+            this.albumPrice = value;
+            return this;
+        }
+        
+        public Builder trackList(List<Track> value){
+            this.trackList = value;
+            return this;
+        }
+        
+        public Builder genre(Genre value){
+            this.genre = value;
+            return this;
+        }
+        
+        public Builder album(Album album){
+            id = album.getId();
+            albumName = album.getAlbumName();
+            albumPrice = album.getAlbumPrice();
+            trackList = album.getTrackList();
+            genre = album.getGenre();
+            
+            return this;
+        }
+        public Album build(){
+            return new Album(this);
+        }
+    }
+    
     public Genre getGenre() {
         return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
     }
 
     public String getAlbumName() {
         return albumName;
     }
 
-    public void setAlbumName(String albumName) {
-        this.albumName = albumName;
-    }
-
     public BigDecimal getAlbumPrice() {
         return albumPrice;
-    }
-
-    public void setAlbumPrice(BigDecimal albumPrice) {
-        this.albumPrice = albumPrice;
     }
 
     public List<Track> getTrackList() {
         return trackList;
     }
 
-    public void setTrackList(List<Track> trackList) {
-        this.trackList = trackList;
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

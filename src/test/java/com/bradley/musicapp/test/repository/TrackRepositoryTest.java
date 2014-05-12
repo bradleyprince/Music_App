@@ -36,9 +36,7 @@ public class TrackRepositoryTest {
     public void createTrack() {
         repo = ctx.getBean(TrackRepository.class);
         
-        Track track = new Track();
-        track.setTrackName("SistaBatina");
-        track.setTrackLength("2:45");        
+        Track track = new Track.Builder().trackName("SistaBatina").trackLength("2:45").build();     
 
         repo.save(track);
         id = track.getId();
@@ -58,8 +56,7 @@ public class TrackRepositoryTest {
     private void updateTrack(){
         repo = ctx.getBean(TrackRepository.class);
         Track track = repo.findOne(id);
-        Track updateTrack = track;
-        updateTrack.setTrackName("Ngomso");
+        Track updateTrack = new Track.Builder().trackName("Ngomso").build();
         
         repo.save(updateTrack);
          

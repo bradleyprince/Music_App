@@ -18,9 +18,6 @@ public class Contact implements Serializable{
     private String homeNumber;
     private String cellNumber;
     private String faxNumber;
-
-    public Contact() {
-    }
     
     public String getHomeNumber() {
         return homeNumber;

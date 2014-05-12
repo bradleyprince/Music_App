@@ -5,6 +5,8 @@
 package com.bradley.musicapp.test.repository;
 
 import com.bradley.musicapp.app.conf.ConnectionConfig;
+import com.bradley.musicapp.domain.Address;
+import com.bradley.musicapp.domain.Contact;
 import com.bradley.musicapp.domain.Person;
 import com.bradley.musicapp.repository.PersonRepository;
 import org.springframework.context.ApplicationContext;
@@ -36,8 +38,13 @@ public class PersonRepositoryTest {
     public void createPerson() {
         repo = (PersonRepository)ctx.getBean("personRepository");
         
-        Person person = new Person();
-        person.setName("Bradley");
+        Address address = new Address();
+        address.setHomeAddress("Da Gama Street");
+        
+        Contact contact = new Contact();
+        contact.setCellNumber("0723260148");
+        
+        Person person = new Person.Builder().name("Bradley").contact(contact).address(address).build();
         
         repo.save(person);
         id = person.getId();

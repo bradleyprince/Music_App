@@ -39,9 +39,7 @@ public class AlbumRepositoryTest {
     public void createAlbum() {
         repo = ctx.getBean(AlbumRepository.class);
         
-        Album album = new Album();
-        album.setAlbumPrice(new BigDecimal("230.00"));
-        album.setAlbumName("SmallTalk");
+        Album album = new Album.Builder().albumName("SmallTalk").albumPrice(new BigDecimal("230.00")).build();
 
         repo.save(album);
         id = album.getId();
@@ -61,8 +59,7 @@ public class AlbumRepositoryTest {
     private void updateAlbum(){
         repo = ctx.getBean(AlbumRepository.class);
         Album album = repo.findOne(id);
-        Album updateAlbum = album;
-        updateAlbum.setAlbumName("BigTalk");
+        Album updateAlbum = new Album.Builder().albumName("BigTalk").build();
         
         repo.save(updateAlbum);
          

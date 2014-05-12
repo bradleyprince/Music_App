@@ -23,28 +23,53 @@ public class Track implements Serializable {
     private String trackName;
     private String trackLength;
 
+    private Track(Builder builder){
+        id = builder.id;
+        trackName = builder.trackName;
+        trackLength = builder.trackLength;
+    }
+    
+    private Track(){
+    }
+    
+    public static class Builder{
+        private Long id;
+        private String trackName;
+        private String trackLength;
+        
+        public Builder(){           
+        }
+        
+        public Builder id(Long value){
+            this.id = value;
+            return this;
+        }
+        
+        public Builder trackName(String value){
+            this.trackName = value;
+            return this;
+        }
+        
+        public Builder trackLength(String value){
+            this.trackLength = value;
+            return this;
+        }
+        
+        public Track build(){
+            return new Track(this);
+        }
+    }
+    
     public String getTrackName() {
         return trackName;
-    }
-
-    public void setTrackName(String trackName) {
-        this.trackName = trackName;
     }
 
     public String getTrackLength() {
         return trackLength;
     }
 
-    public void setTrackLength(String trackLength) {
-        this.trackLength = trackLength;
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

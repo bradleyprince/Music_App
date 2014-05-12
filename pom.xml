@@ -118,16 +118,34 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.5.Final</version>
+            <version>3.3.2.GA</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
-            
-        
-    </dependencies>
+            <dependency>
+                  <groupId>org.hibernate</groupId>
+                  <artifactId>hibernate</artifactId>
+                  <version>3.2.5.ga</version>
+            </dependency>
+            <dependency>
+                  <groupId>org.hibernate</groupId>
+                  <artifactId>ejb3-persistence</artifactId>
+                  <version>1.0.1.GA</version>
+            </dependency>
+            <dependency>
+                  <groupId>javax.sql</groupId>
+                  <artifactId>jdbc-stdext</artifactId>
+                  <version>2.0</version>
+            </dependency>
+            <dependency>
+                  <groupId>javax.transaction</groupId>
+                  <artifactId>jta</artifactId>
+                  <version>1.0.1B</version>
+            </dependency>
+      </dependencies>
     
     <dependencyManagement>
         <dependencies>

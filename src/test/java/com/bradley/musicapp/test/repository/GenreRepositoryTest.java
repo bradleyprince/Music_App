@@ -39,8 +39,7 @@ public class GenreRepositoryTest {
     public void createGenre() {
         repo = ctx.getBean(GenreRepository.class);
         
-        Genre genre = new Genre();
-        genre.setType("Pop");
+        Genre genre = new Genre.Builder().type("Pop").build();
         
         repo.save(genre);
         id = genre.getId();
@@ -60,8 +59,7 @@ public class GenreRepositoryTest {
     private void updateGenre(){
         repo = ctx.getBean(GenreRepository.class);
         Genre genre = repo.findOne(id);
-        Genre updateGenre = genre;
-        updateGenre.setType("Reggae");
+        Genre updateGenre = new Genre.Builder().type("Reggae").build();
         
         repo.save(updateGenre);
          
