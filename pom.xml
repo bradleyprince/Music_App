@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-      <dependencies>
+    <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -118,34 +118,16 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.3.2.GA</version>
+            <version>4.3.5.Final</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
-            <dependency>
-                  <groupId>org.hibernate</groupId>
-                  <artifactId>hibernate</artifactId>
-                  <version>3.2.5.ga</version>
-            </dependency>
-            <dependency>
-                  <groupId>org.hibernate</groupId>
-                  <artifactId>ejb3-persistence</artifactId>
-                  <version>1.0.1.GA</version>
-            </dependency>
-            <dependency>
-                  <groupId>javax.sql</groupId>
-                  <artifactId>jdbc-stdext</artifactId>
-                  <version>2.0</version>
-            </dependency>
-            <dependency>
-                  <groupId>javax.transaction</groupId>
-                  <artifactId>jta</artifactId>
-                  <version>1.0.1B</version>
-            </dependency>
-      </dependencies>
+            
+        
+    </dependencies>
     
     <dependencyManagement>
         <dependencies>
@@ -166,8 +148,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>

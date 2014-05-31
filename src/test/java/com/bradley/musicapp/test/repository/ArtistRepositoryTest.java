@@ -59,7 +59,7 @@ public class ArtistRepositoryTest {
     private void updateArtist(){
         repo = ctx.getBean(ArtistRepository.class);
         Artist artist = repo.findOne(id);
-        Artist updateArtist = new Artist.Builder().artistName("John").build();
+        Artist updateArtist = new Artist.Builder().artist(artist).artistName("John").build();
         
         repo.save(updateArtist);
          

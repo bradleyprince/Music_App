@@ -55,6 +55,14 @@ public class Track implements Serializable {
             return this;
         }
         
+        public Builder track(Track track){
+            id = track.getId();
+            trackName = track.getTrackName();
+            trackLength = track.getTrackLength();
+            
+            return this;
+        }   
+        
         public Track build(){
             return new Track(this);
         }

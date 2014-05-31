@@ -29,7 +29,7 @@ public class Album implements Serializable {
     private Long id;
     private String albumName;
     private BigDecimal albumPrice;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "album_id")        
     List<Track> trackList;
     @OneToOne

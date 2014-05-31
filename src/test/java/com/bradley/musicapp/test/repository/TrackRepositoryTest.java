@@ -56,7 +56,7 @@ public class TrackRepositoryTest {
     private void updateTrack(){
         repo = ctx.getBean(TrackRepository.class);
         Track track = repo.findOne(id);
-        Track updateTrack = new Track.Builder().trackName("Ngomso").build();
+        Track updateTrack = new Track.Builder().track(track).trackName("Ngomso").build();
         
         repo.save(updateTrack);
          

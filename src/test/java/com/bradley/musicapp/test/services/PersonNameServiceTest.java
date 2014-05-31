@@ -53,8 +53,12 @@ public class PersonNameServiceTest {
         List<Person> people = personService.getNamesStartingWith("C");
 
         Assert.assertEquals(people.size(), 3);
+        
+        personRepository.delete(p1);
+        personRepository.delete(p2);
+        personRepository.delete(p3);
     }
-
+    
     @BeforeClass
     public static void setUpClass() throws Exception {
         ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);

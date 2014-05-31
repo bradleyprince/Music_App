@@ -59,7 +59,7 @@ public class GenreRepositoryTest {
     private void updateGenre(){
         repo = ctx.getBean(GenreRepository.class);
         Genre genre = repo.findOne(id);
-        Genre updateGenre = new Genre.Builder().type("Reggae").build();
+        Genre updateGenre = new Genre.Builder().genre(genre).type("Reggae").build();
         
         repo.save(updateGenre);
          

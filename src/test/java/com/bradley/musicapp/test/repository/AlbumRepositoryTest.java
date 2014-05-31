@@ -59,7 +59,7 @@ public class AlbumRepositoryTest {
     private void updateAlbum(){
         repo = ctx.getBean(AlbumRepository.class);
         Album album = repo.findOne(id);
-        Album updateAlbum = new Album.Builder().albumName("BigTalk").build();
+        Album updateAlbum = new Album.Builder().album(album).albumName("BigTalk").build();
         
         repo.save(updateAlbum);
          
