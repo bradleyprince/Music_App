@@ -11,6 +11,6 @@ import java.util.List;
  *
  * @author Balla
  */
-public interface PersonNameService {
+public interface PersonNameService extends Services<Person, Long>{
     public List<Person> getNamesStartingWith(String startingWith);
 }

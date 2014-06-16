@@ -8,6 +8,7 @@ import com.bradley.musicapp.app.conf.ConnectionConfig;
 import com.bradley.musicapp.domain.Person;
 import com.bradley.musicapp.repository.PersonRepository;
 import com.bradley.musicapp.sevices.PersonNameService;
+import com.bradley.musicapp.test.ConnectionConfigTest;
 import static com.bradley.musicapp.test.repository.PersonRepositoryTest.ctx;
 import java.util.List;
 import org.springframework.context.ApplicationContext;
@@ -27,7 +28,6 @@ import org.testng.annotations.Test;
 public class PersonNameServiceTest {
     public static ApplicationContext ctx;
     private Long id;
-    private PersonRepository personRepository;
     private PersonNameService personService;
     
     public PersonNameServiceTest() {
@@ -37,7 +37,6 @@ public class PersonNameServiceTest {
     //
     @Test
     public void getPeopleNameStartingWith() {
-        personRepository = ctx.getBean(PersonRepository.class);
         personService = ctx.getBean(PersonNameService.class);
         
         Person p1 = new Person.Builder().name("Chris").build();
@@ -46,22 +45,18 @@ public class PersonNameServiceTest {
         
         Person p3 = new Person.Builder().name("Copper").build();
         
-        personRepository.save(p1);
-        personRepository.save(p2);
-        personRepository.save(p3);
+        personService.persist(p1);
+        personService.persist(p2);
+        personService.persist(p3);
         
         List<Person> people = personService.getNamesStartingWith("C");
 
         Assert.assertEquals(people.size(), 3);
-        
-        personRepository.delete(p1);
-        personRepository.delete(p2);
-        personRepository.delete(p3);
     }
     
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
     }
 
     @AfterClass
@@ -74,5 +69,11 @@ public class PersonNameServiceTest {
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
+        personService = ctx.getBean(PersonNameService.class);
+        List<Person> list = personService.findAll();
+        
+        for(Person person : list){
+            personService.remove(person);
+        }
     }
 }

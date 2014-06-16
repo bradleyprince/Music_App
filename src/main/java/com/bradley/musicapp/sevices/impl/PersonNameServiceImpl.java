@@ -25,7 +25,7 @@ public class PersonNameServiceImpl implements PersonNameService{
     @Override
     public List<Person> getNamesStartingWith(String startingWith) {
         List<Person> personList = personRepository.findAll();
-        List<Person> personsStartingWithList = new LinkedList<Person>();
+        List<Person> personsStartingWithList = new LinkedList<>();
         
         for(Person person : personList){
             if(person.getName().startsWith(startingWith)){
@@ -34,6 +34,40 @@ public class PersonNameServiceImpl implements PersonNameService{
         }
         
         return personsStartingWithList;
+    }
+
+    
+    @Override
+    public Person find(Long id) {
+        return personRepository.findOne(id);
+    }
+
+    
+    @Override
+    public Person persist(Person entity) {
+        return personRepository.save(entity);
+    }
+
+    
+    @Override
+    public Person merge(Person entity) {
+        if(entity.getId() != null){
+            return personRepository.save(entity);
+        }
+        
+        return null;
+    }
+
+    
+    @Override
+    public void remove(Person entity) {
+        personRepository.delete(entity);
+    }
+
+    
+    @Override
+    public List<Person> findAll() {
+        return personRepository.findAll();
     }
     
 }
