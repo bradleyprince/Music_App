@@ -28,7 +28,8 @@ public class PersonNameServiceImpl implements PersonNameService{
         List<Person> personsStartingWithList = new LinkedList<>();
         
         for(Person person : personList){
-            if(person.getName().startsWith(startingWith)){
+            System.out.println("Starting With = " + startingWith);
+            if(person.getName().getFirstName().startsWith(startingWith)){
                 personsStartingWithList.add(person);
             }
         }
@@ -36,6 +37,20 @@ public class PersonNameServiceImpl implements PersonNameService{
         return personsStartingWithList;
     }
 
+    @Override
+    public Person getPersonByName(String name) {
+        List<Person> personList = personRepository.findAll();
+        Person foundPerson = null;
+        
+        for(Person person : personList){
+            if(person.getName().getFirstName().equalsIgnoreCase(name)){
+                foundPerson = person;
+                break;
+            }
+        }
+        
+        return foundPerson;
+    }
     
     @Override
     public Person find(Long id) {
@@ -69,5 +84,5 @@ public class PersonNameServiceImpl implements PersonNameService{
     public List<Person> findAll() {
         return personRepository.findAll();
     }
-    
+
 }

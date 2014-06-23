@@ -5,13 +5,12 @@
 package com.bradley.musicapp.sevices;
 
 import com.bradley.musicapp.domain.Person;
-import java.util.List;
+import com.bradley.musicapp.sevices.Services;
+
 
 /**
  *
  * @author Balla
  */
-public interface PersonNameService extends Services<Person, Long>{
-    public List<Person> getNamesStartingWith(String startingWith);
-    public Person getPersonByName(String name);
+public interface PersonService extends Services<Person, Long>{
 }

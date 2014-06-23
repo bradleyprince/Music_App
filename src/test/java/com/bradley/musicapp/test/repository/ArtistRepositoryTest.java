@@ -4,16 +4,12 @@
  */
 package com.bradley.musicapp.test.repository;
 
-import com.bradley.musicapp.app.conf.ConnectionConfig;
 import com.bradley.musicapp.domain.Artist;
-import com.bradley.musicapp.domain.Genre;
 import com.bradley.musicapp.repository.ArtistRepository;
-import com.bradley.musicapp.repository.GenreRepository;
-import static com.bradley.musicapp.test.repository.GenreRepositoryTest.ctx;
+import com.bradley.musicapp.test.ConnectionConfigTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
-import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -81,7 +77,7 @@ public class ArtistRepositoryTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
     }
 
     @AfterClass

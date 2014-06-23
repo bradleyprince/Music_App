@@ -5,6 +5,7 @@
 package com.bradley.musicapp.test.services;
 
 import com.bradley.musicapp.app.conf.ConnectionConfig;
+import com.bradley.musicapp.domain.Name;
 import com.bradley.musicapp.domain.Person;
 import com.bradley.musicapp.repository.PersonRepository;
 import com.bradley.musicapp.sevices.PersonNameService;
@@ -38,12 +39,20 @@ public class PersonNameServiceTest {
     @Test
     public void getPeopleNameStartingWith() {
         personService = ctx.getBean(PersonNameService.class);
+        Name name = new Name();
+        name.setFirstName("Chris");
         
-        Person p1 = new Person.Builder().name("Chris").build();
+        Person p1 = new Person.Builder().name(name).build();
         
-        Person p2 = new Person.Builder().name("Cobra").build();
+        Name name1 = new Name();
+        name1.setFirstName("Cobra");
         
-        Person p3 = new Person.Builder().name("Copper").build();
+        Person p2 = new Person.Builder().name(name1).build();
+        
+        Name name2 = new Name();
+        name2.setFirstName("Copper");
+        
+        Person p3 = new Person.Builder().name(name2).build();
         
         personService.persist(p1);
         personService.persist(p2);

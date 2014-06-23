@@ -26,7 +26,6 @@ public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="artist_id")
     private Artist artist;
@@ -34,6 +33,8 @@ public class Person implements Serializable {
     private Contact contact;
     @Embedded
     private Address address;
+    @Embedded
+    private Name name;
 
     private Person(Builder builder){
         id = builder.id;
@@ -48,7 +49,7 @@ public class Person implements Serializable {
     
     public static class Builder{
         private Long id;
-        private String name;
+        private Name name;
         private Artist artist;
         private Contact contact;
         private Address address;
@@ -61,7 +62,7 @@ public class Person implements Serializable {
             return this;
         }
         
-        public Builder name(String value){
+        public Builder name(Name value){
             this.name = value;
             return this;
         }
@@ -108,7 +109,7 @@ public class Person implements Serializable {
         return address;
     }
     
-    public String getName() {
+    public Name getName() {
         return name;
     }
     

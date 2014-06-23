@@ -2,17 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.bradley.musicapp.test.repository;
+package com.bradley.musicapp.test.services;
 
-import com.bradley.musicapp.domain.Address;
-import com.bradley.musicapp.domain.Contact;
-import com.bradley.musicapp.domain.Name;
-import com.bradley.musicapp.domain.Person;
-import com.bradley.musicapp.repository.PersonRepository;
+import com.bradley.musicapp.domain.Track;
+import com.bradley.musicapp.sevices.TrackFindService;
+import com.bradley.musicapp.sevices.impl.TrackFindServiceImpl;
 import com.bradley.musicapp.test.ConnectionConfigTest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
+import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -23,36 +23,26 @@ import org.testng.annotations.Test;
  *
  * @author Balla
  */
-public class PersonRepositoryTest {    
+public class TrackFindServiceTest {
     public static ApplicationContext ctx;
-    private Long id;
+    @Autowired TrackFindService findService;
     
-    private PersonRepository repo;
-    
-    public PersonRepositoryTest() {
+    public TrackFindServiceTest() {
     }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void createPerson() {
-        repo = (PersonRepository)ctx.getBean("personRepository");
+    public void getTrack() {
+        findService = ctx.getBean(TrackFindService.class);
         
-        Address address = new Address();
-        address.setHomeAddress("Da Gama Street");
+        Track track = new Track.Builder().trackName("Stand").trackLength("01:56").build();
+        findService.persist(track);
         
-        Contact contact = new Contact();
-        contact.setCellNumber("0723260148");
+        Track foundTrack = findService.getTrackName("Stand");
+        //System.out.println("Saved Track = ");
         
-        Name name = new Name();
-        name.setFirstName("Bradley");
-        name.setLastName("Prince");
-        
-        Person person = new Person.Builder().name(name).contact(contact).address(address).build();
-        
-        repo.save(person);
-        id = person.getId();
-        Assert.assertNotNull(person);
+        Assert.assertEquals(track.getTrackName(),foundTrack.getTrackName());
     }
 
     @BeforeClass

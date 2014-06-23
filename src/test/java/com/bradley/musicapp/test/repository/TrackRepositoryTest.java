@@ -4,9 +4,9 @@
  */
 package com.bradley.musicapp.test.repository;
 
-import com.bradley.musicapp.app.conf.ConnectionConfig;
 import com.bradley.musicapp.domain.Track;
 import com.bradley.musicapp.repository.TrackRepository;
+import com.bradley.musicapp.test.ConnectionConfigTest;
 import static com.bradley.musicapp.test.repository.TrackRepositoryTest.ctx;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -78,7 +78,7 @@ public class TrackRepositoryTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
     }
 
     @AfterClass

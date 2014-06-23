@@ -8,6 +8,7 @@ import com.bradley.musicapp.app.conf.ConnectionConfig;
 import com.bradley.musicapp.domain.Album;
 import com.bradley.musicapp.repository.AlbumRepository;
 import com.bradley.musicapp.repository.AlbumRepository;
+import com.bradley.musicapp.test.ConnectionConfigTest;
 import static com.bradley.musicapp.test.repository.AlbumRepositoryTest.ctx;
 import java.math.BigDecimal;
 import org.springframework.context.ApplicationContext;
@@ -81,7 +82,7 @@ public class AlbumRepositoryTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
-        ctx = new AnnotationConfigApplicationContext(ConnectionConfig.class);
+        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
     }
 
     @AfterClass
