@@ -96,7 +96,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>4.0.5.RELEASE</version>
+            <version>5.0.6.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
@@ -138,6 +138,8 @@
             <artifactId>spring-orm</artifactId>
             <version>4.0.5.RELEASE</version>
         </dependency>
+        
+        <!-- Replace Hibernate with JDBC Driver -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
@@ -176,7 +178,21 @@
             <artifactId>derbyclient</artifactId>
             <version>10.10.1.1</version>
         </dependency>
-            
+        
+        <!-- New dependencies  -->
+        <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>4.0.1</version>
+		    <scope>provided</scope>
+		</dependency>
+       	
+       	<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-core</artifactId>
+		    <version>9.0.8</version>
+		</dependency>
+       	
         <!-- javax.validation (JSR-303) -->
         <dependency>
             <groupId>javax.validation</groupId>
@@ -278,17 +294,6 @@
     
     </dependencies>
     
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-framework-bom</artifactId>
-                <version>4.0.5.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <build>
         <plugins>
@@ -312,6 +317,21 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+            <plugin>
+               <groupId>org.apache.tomcat.maven</groupId>
+               <artifactId>tomcat7-maven-plugin</artifactId>
+               <version>2.2</version>
+               <configuration>
+			   <path>/musicapp</path>
+			   </configuration>
+               <!-- Config: contextPath and Port (Default - /SimpleMavenWebApp : 8080) -->
+               <!--
+               <configuration>
+                   <path>/</path>
+                   <port>8899</port>
+               </configuration>
+               --> 
+           </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>

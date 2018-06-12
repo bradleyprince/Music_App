@@ -5,10 +5,14 @@
  */
 package com.bradley.musicapp.test.restapi;
 
+import java.util.Collections;
+
 import com.bradley.musicapp.domain.Track;
 import com.bradley.musicapp.sevices.TrackFindService;
 import com.bradley.musicapp.test.ConnectionConfigTest;
-import java.util.Collections;
+
+import org.junit.Assert;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,8 +24,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 /**
  *
@@ -40,7 +42,7 @@ public class TrackRestControllerTest {
         Track track = new Track.Builder().trackName("yolo").trackLength("03:45").build();
         HttpEntity<Track> requestEntity = new HttpEntity<>(track, getContentType());
 //        Make the HTTP POST request, marshaling the request to JSON, and the response to a String
-        ResponseEntity<Track> responseEntity = restTemplate.
+        ResponseEntity<Track> responseEntity = this.restTemplate.
                 exchange(URL + "api/track/create", HttpMethod.POST, requestEntity, Track.class);
         System.out.println(" THE RESPONSE BODY " + responseEntity.getBody());
         System.out.println(" THE RESPONSE STATUS CODE " + responseEntity.getStatusCode());
@@ -54,25 +56,25 @@ public class TrackRestControllerTest {
    @Test
     public void testTrackUpdate() {
        ctx = new AnnotationConfigApplicationContext(ConnectionConfigTest.class);
-       trackService = ctx.getBean(TrackFindService.class);
+       this.trackService = ctx.getBean(TrackFindService.class);
         // LEFT AS AN EXERCISE FOR YOU
         // GET THE TRACK and THEN CHANGE AND MAKE A COPY
         //THEN SEND TO THE SERVER USING A PUT OR POST
         // THEN READ BACK TO SEE IF YOUR CHANGE HAS HAPPENED
        System.out.println("id = " + id);
-       System.out.println("track = " + trackService);
-        Track foundTrack = trackService.find(id);
+       System.out.println("track = " + this.trackService);
+        Track foundTrack = this.trackService.find(id);
         Track track = new Track.Builder().track(foundTrack).trackName("lollipop").trackLength("02:22").build();
         
         HttpEntity<Track> requestEntity = new HttpEntity<>(track, getContentType());
 //        Make the HTTP POST request, marshaling the request to JSON, and the response to a String
-        ResponseEntity<String> responseEntity = restTemplate.
+        ResponseEntity<String> responseEntity = this.restTemplate.
                 exchange(URL + "api/track/update", HttpMethod.PUT, requestEntity, String.class);
         System.out.println(" THE RESPONSE BODY " + responseEntity.getBody());
         System.out.println(" THE RESPONSE STATUS CODE " + responseEntity.getStatusCode());
         System.out.println(" THE RESPONSE IS HEADERS " + responseEntity.getHeaders());
         
-        Track foundTrack1 = trackService.find(id);
+        Track foundTrack1 = this.trackService.find(id);
         System.out.println("updated track = " + track + " | original track = " + foundTrack1);
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
 
@@ -81,7 +83,7 @@ public class TrackRestControllerTest {
     public void testreadTrackByNameName() {
         String trackName = "yolo";
         HttpEntity<?> requestEntity = getHttpEntity();
-        ResponseEntity<Track> responseEntity = restTemplate.exchange(URL + "api/track/name/" + trackName, HttpMethod.GET, requestEntity, Track.class);
+        ResponseEntity<Track> responseEntity = this.restTemplate.exchange(URL + "api/track/name/" + trackName, HttpMethod.GET, requestEntity, Track.class);
         Track track = responseEntity.getBody();
 
         Assert.assertNotNull(track);
@@ -92,7 +94,7 @@ public class TrackRestControllerTest {
     public void testreadTrackById() {
         String trackId = "2";
         HttpEntity<?> requestEntity = getHttpEntity();
-        ResponseEntity<Track> responseEntity = restTemplate.exchange(URL + "api/track/id/" + trackId, HttpMethod.GET, requestEntity, Track.class);
+        ResponseEntity<Track> responseEntity = this.restTemplate.exchange(URL + "api/track/id/" + trackId, HttpMethod.GET, requestEntity, Track.class);
         Track track = responseEntity.getBody();
 
         Assert.assertNotNull(track);
@@ -102,7 +104,7 @@ public class TrackRestControllerTest {
     //@Test
     public void testgetAllTracks() {
         HttpEntity<?> requestEntity = getHttpEntity();
-        ResponseEntity<Track[]> responseEntity = restTemplate.exchange(URL + "api/track/tracks", HttpMethod.GET, requestEntity, Track[].class);
+        ResponseEntity<Track[]> responseEntity = this.restTemplate.exchange(URL + "api/track/tracks", HttpMethod.GET, requestEntity, Track[].class);
         Track[] tracks = responseEntity.getBody();
         for (Track track : tracks) {
             System.out.println("The Track Name is " + track.getTrackName());
@@ -116,7 +118,7 @@ public class TrackRestControllerTest {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setAccept(Collections.singletonList(new MediaType("application", "json")));
         HttpEntity<?> requestEntity = new HttpEntity<>(requestHeaders);
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        this.restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         return requestEntity;
     }
 

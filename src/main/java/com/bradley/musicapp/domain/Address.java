@@ -5,6 +5,7 @@
 package com.bradley.musicapp.domain;
 
 import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 
 /**
@@ -13,32 +14,35 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class Address implements Serializable{
-    private String homeAddress;
-    private String postalAddress;
-    private String emailAddress;
-
-    public String getHomeAddress() {
-        return homeAddress;
-    }
-
-    public void setHomeAddress(String homeAddress) {
-        this.homeAddress = homeAddress;
-    }
-
-    public String getPostalAddress() {
-        return postalAddress;
-    }
-
-    public void setPostalAddress(String postalAddress) {
-        this.postalAddress = postalAddress;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
- 
+   
+   private static final long serialVersionUID = 6106674153190698124L;
+   
+   private String homeAddress;
+   private String postalAddress;
+   private String emailAddress;
+   
+   public String getHomeAddress() {
+      return this.homeAddress;
+   }
+   
+   public void setHomeAddress(final String homeAddress) {
+      this.homeAddress = homeAddress;
+   }
+   
+   public String getPostalAddress() {
+      return this.postalAddress;
+   }
+   
+   public void setPostalAddress(final String postalAddress) {
+      this.postalAddress = postalAddress;
+   }
+   
+   public String getEmailAddress() {
+      return this.emailAddress;
+   }
+   
+   public void setEmailAddress(final String emailAddress) {
+      this.emailAddress = emailAddress;
+   }
+   
 }
